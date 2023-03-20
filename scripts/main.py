@@ -12,8 +12,9 @@ def generate_prompt(text: str):
       model="gpt-3.5-turbo",
       messages=[{"role": "system", "content": "You are a helpful assistant. \
       You will generate Stable Diffusion image generation prompts based on user input. \
-      Your response should contain ONLY the image generation prompt and NO explanation. \
-      Do NOT ever use periods to seperate sentences, instead use ,."}, \
+      Please separate descriptors by comma. \
+      Do NOT say anything that does not have to do with the actual prompt. \
+      Your response should contain ONLY the image generation prompt and NO explanation."}, \
       {"role": "user", "content": f"{text}"}]
     )
 	
