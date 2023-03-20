@@ -5,7 +5,7 @@ from modules import script_callbacks
 from modules import generation_parameters_copypaste as params_copypaste
 
 def generate_prompt(text: str):
-    # Replace 'your_api_key_here' with your actual API key
+    # Replace 'placeYourKeyHere' with your actual API key
     openai.api_key = "placeYourKeyHere"
 
     completion = openai.ChatCompletion.create(
