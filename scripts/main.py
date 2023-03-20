@@ -10,7 +10,7 @@ def generate_prompt(text: str):
 
     completion = openai.ChatCompletion.create(
       model="gpt-3.5-turbo",
-      messages=[{"role": "user", "content": "Please create a detailed prompt for stable diffusion that describes the inside of a tavern. The generated prompt is not meant to be read by humans. It is meant to be input into stable diffusion to generate an image. Please separate descriptors by comma."}]
+      messages=[{"role": "user", "content": f"Please create a detailed prompt for stable diffusion that describes {text}. The generated prompt is not meant to be read by humans. It is meant to be input into stable diffusion to generate an image. Please separate descriptors by comma."}]
     )
 	
     return completion.choices[0].message['content']
