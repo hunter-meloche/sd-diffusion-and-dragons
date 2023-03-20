@@ -31,7 +31,7 @@ def generate_prompt(text: str):
     return completion.choices[0].message['content']
 
 def on_ui_tabs():
-    with gr.Blocks(analytics_enabled=False) as dungeonAI_interface:
+    with gr.Blocks(analytics_enabled=False) as dnd_interface:
         with gr.Row():
             with gr.Column():
                 tb_input = gr.Textbox(label='ChatGPT Input', interactive=True)
@@ -46,7 +46,7 @@ def on_ui_tabs():
             outputs=tb_output
         )
         
-    return [(dungeonAI_interface, "dungeonAI", "dungeonAI_interface")]
+    return [(dnd_interface, "DnD", "dnd_interface")]
 
 
 script_callbacks.on_ui_tabs(on_ui_tabs)
