@@ -40,3 +40,20 @@ Before:
 After:
 
 ![image](https://user-images.githubusercontent.com/123516285/226486552-ed34542f-330b-43ae-af64-2d92e34e6d38.png)
+
+```
+Input:
+a shady figure
+
+Output:
+shady figure, tall and slim, wearing a long coat, black fedora hat with a wide brim, a scarf wrapped around the lower half of their face, standing on a dimly lit street corner at night, with a faint glow of a streetlamp in the background
+```
+
+Before:
+
+![image](https://user-images.githubusercontent.com/123516285/226487437-2b541042-b92a-4073-a77b-dffddd7cece6.png)
+
+
+After:
+
+![image](https://user-images.githubusercontent.com/123516285/226487752-47663983-d788-4c06-952b-c9ae1542e2d3.png)
