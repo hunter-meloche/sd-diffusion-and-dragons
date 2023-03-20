@@ -23,3 +23,20 @@ Before:
 After:
 
 ![image](https://user-images.githubusercontent.com/123516285/226485787-e9bcfd1e-cf2c-48ea-b950-2648fb259427.png)
+
+```
+Input:
+an armored warrior
+
+Output:
+Armored warrior, male, muscular, tall, long hair, wielding sword, full plate armor, battle-worn, standing on rocky terrain, facing towards the viewer, intense gaze
+```
+
+Before:
+
+![image](https://user-images.githubusercontent.com/123516285/226486704-1c7e8ac7-b0a5-42c4-96af-ce64dd661717.png)
+
+
+After:
+
+![image](https://user-images.githubusercontent.com/123516285/226486552-ed34542f-330b-43ae-af64-2d92e34e6d38.png)
