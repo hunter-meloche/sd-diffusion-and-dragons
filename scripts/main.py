@@ -21,8 +21,7 @@ def on_ui_tabs():
             with gr.Column():
                 tb_input = gr.Textbox(label='Input Theme', interactive=True)
                 btn_generate = gr.Button(value='Generate', variant='primary')
-                tb_output = gr.Textbox(label='Output', interactive=True)
-                params_copypaste.bind_buttons(buttons, None, tb_output)               
+                tb_output = gr.Textbox(label='Output', interactive=True)           
 
         btn_generate.click(
             fn=generate_prompt,
