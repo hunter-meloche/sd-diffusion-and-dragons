@@ -15,7 +15,9 @@ def generate_prompt(text: str):
       Please separate descriptors by comma. Do NOT say anything that does not have to do with the actual prompt. \
       An example of what NOT to say is 'The prompt for stable diffusion to generate an image of golden dragon is as follows:' \
       Only provide the prompt. Do NOT give it direct commands like 'Generate an image'. Instead only describe the subject with your prompt. \
-      There should not be any new lines or text outside of the prompt. You should only create one paragraph."}]
+      There should not be any new lines or text outside of the prompt. You should only create one paragraph. Do not have any text like \
+      'escribe Atlantis with a prompt for Stable Diffusion to generate an image as follows:' followed by the prompt. There should only be the \
+      prompt in your response."}]
     )
 	
     return completion.choices[0].message['content']
