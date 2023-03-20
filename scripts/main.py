@@ -14,7 +14,8 @@ def generate_prompt(text: str):
       The generated prompt is not meant to be read by humans. It is meant to be input into stable diffusion to generate an image. \
       Please separate descriptors by comma. Do NOT say anything that does not have to do with the actual prompt. \
       An example of what NOT to say is 'The prompt for stable diffusion to generate an image of golden dragon is as follows:' \
-      Only provide the prompt. Do NOT give it direct commands like 'Generate an image'. Instead only describe the subject with your prompt."}]
+      Only provide the prompt. Do NOT give it direct commands like 'Generate an image'. Instead only describe the subject with your prompt. \
+      There should not be any new lines or text outside of the prompt. You should only create one paragraph."}]
     )
 	
     return completion.choices[0].message['content']
