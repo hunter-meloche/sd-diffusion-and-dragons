@@ -1,4 +1,4 @@
-# dungeonAI
+# Diffusion and Dragons
 stable-diffusion-web-ui extension that generates detailed prompts with ChatGPT
 
 ## About
