@@ -10,11 +10,12 @@ def generate_prompt(text: str):
 
     completion = openai.ChatCompletion.create(
       model="gpt-3.5-turbo",
-      messages=[{"role": "system", "content": "You are a helpful assistant. \
-      You will generate Stable Diffusion image generation prompts based on user input. \
+      messages=[{"role": "system", "content": \
+      "You are a helpful assistant that creates extremely detailed prompts for stable diffusion. \
+      You will generate prompts based on user input. \
       Please separate descriptors by comma. \
-      Do NOT say anything that does not have to do with the actual prompt. \
-      Your response should contain ONLY the image generation prompt and NO explanation."}, \
+      Your response should contain ONLY the image generation prompt and NO explanation. \
+      Do respond with text like 'Generate an image of a'."}, \
       {"role": "user", "content": f"{text}"}]
     )
 	
