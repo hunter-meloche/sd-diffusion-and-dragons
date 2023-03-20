@@ -10,14 +10,11 @@ def generate_prompt(text: str):
 
     completion = openai.ChatCompletion.create(
       model="gpt-3.5-turbo",
-      messages=[{"role": "user", "content": f"Please create a detailed prompt for stable diffusion that describes {text}. \
-      The generated prompt is not meant to be read by humans. It is meant to be input into stable diffusion to generate an image. \
-      Please separate descriptors by comma. Do NOT say anything that does not have to do with the actual prompt. \
-      An example of what NOT to say is 'The prompt for stable diffusion to generate an image of golden dragon is as follows:' \
-      Only provide the prompt. Do NOT give it direct commands like 'Generate an image'. Instead only describe the subject with your prompt. \
-      There should not be any new lines or text outside of the prompt. You should only create one paragraph. Do not have any text like \
-      'escribe Atlantis with a prompt for Stable Diffusion to generate an image as follows:' followed by the prompt. There should only be the \
-      prompt in your response."}]
+      messages=[{"role": "system", "content": "You are a helpful assistant. \
+      You will generate Stable Diffusion image generation prompts based on user input. \
+      Your response should contain ONLY the image generation prompt and NO explanation. \
+      Do NOT ever use periods to seperate sentences, instead use ,."}, \
+      {"role": "user", "content": f"{text}"}]
     )
 	
     return completion.choices[0].message['content']
