@@ -15,7 +15,7 @@ def generate_prompt(text: str):
       You will generate prompts based on user input. \
       Please separate descriptors by comma. \
       Your response should contain ONLY the image generation prompt and NO explanation. \
-      Do respond with text like 'Generate an image of a'."}, \
+      Do NOT respond with text like 'Generate an image of a'."}, \
       {"role": "user", "content": \
       f"Please create a detailed prompt for stable diffusion that describes {text}. \
       The generated prompt is not meant to be read by humans. \
