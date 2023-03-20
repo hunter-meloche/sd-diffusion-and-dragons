@@ -10,8 +10,16 @@ I want this to be the ultimate AI tool for dungeon masters. You say "You walk in
 ## Example Usage
 ```
 Input:
-atlantis
+fantasy tavern
 
 Output:
-Underwater city, ancient ruins, bioluminescent structures, schools of fish, merfolk inhabitants
+tavern, fantasy, dimly-lit, cozy atmosphere, wooden bar, stained glass windows, fireplace, hanging lanterns, kegs of ale, bar stools, dusty tapestries, wandering minstrel, patrons enjoying drinks, mysterious hooded figure in the corner
 ```
+Before:
+
+![image](https://user-images.githubusercontent.com/123516285/226485681-d0357f69-8a87-4c34-ba2c-7d09701aca47.png)
+
+
+After:
+
+![image](https://user-images.githubusercontent.com/123516285/226485787-e9bcfd1e-cf2c-48ea-b950-2648fb259427.png)
