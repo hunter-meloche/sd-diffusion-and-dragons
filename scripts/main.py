@@ -111,8 +111,6 @@ def on_ui_tabs():
                 with gr.Row():
                     btn_sendTxt2img = gr.Button(value='Send to txt2img')
                     btn_sendImg2img = gr.Button(value='Send to img2img')
-                with gr.Row():
-                    btn_submit = gr.Button(value='Generate')
 
         btn_saveApiKey.click(
             fn=write_apiKey,
