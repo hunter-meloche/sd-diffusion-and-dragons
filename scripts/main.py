@@ -71,6 +71,7 @@ def on_ui_tabs():
             fn=generate_description,
             inputs=tb_input,
             outputs=tb_descOutput
+	)
                 
         btn_imgGenerate.click(
             fn=generate_imgPrompt,
