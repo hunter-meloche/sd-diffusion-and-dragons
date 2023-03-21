@@ -1,8 +1,7 @@
 import os
 import openai
 import gradio as gr
-from modules import script_callbacks
-from modules import generation_parameters_copypaste as params_copypaste
+from modules import script_callbacks, generation_parameters_copypaste, ui
 
 KEY_PATH = req_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), ".openai")
 KEY = "openAI_API_key"
