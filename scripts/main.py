@@ -93,7 +93,7 @@ def on_ui_tabs():
                 with gr.Row():
                     tb_imgOutput = gr.Textbox(label='Image Prompt', interactive=False)
 
-        btn_writeApiKey.click(
+        btn_saveApiKey.click(
             fn=write_apiKey,
             inputs=tb_apiKey
 	)
