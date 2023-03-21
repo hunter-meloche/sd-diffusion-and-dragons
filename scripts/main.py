@@ -86,24 +86,33 @@ def generate_imgPrompt(text: str):
 def on_ui_tabs():
     with gr.Blocks(analytics_enabled=False) as dnd_interface:
         with gr.Row():
-            with gr.Column(scale=1):
+            with gr.Column(scale=5):
                 tb_input = gr.Textbox(label='ChatGPT Input', interactive=True)
                 with gr.Row():
                     btn_descGenerate = gr.Button(value='Generate Text Description', variant='primary')
                     btn_imgGenerate = gr.Button(value='Generate Image Prompt', variant='primary')
                 with gr.Row():
                     tb_apiKey = gr.Textbox(label='openAI API Key', interactive=True)
-                    btn_saveApiKey = gr.Button(value='Save API Key', variant='primary')		
-            with gr.Column(scale=2):        
+                    btn_saveApiKey = gr.Button(value='Save API Key')
+            with gr.Column(scale=1):
+                ta_info = gr.TextArea(label='Info', value='Diffusion and Dragons:\n\nCreate a textual description to read aloud to your players and generate detailed visual aids.\n\nResults are geared towards fantasy, but can easily be used for other genres.')
+            with gr.Column(scale=10):        
                 with gr.Row():
-                    tb_descOutput = gr.Textbox(label='Text Description', interactive=False)
+                    tb_descOutput = gr.Textbox(label='Text Description', interactive=True, lines=3)
                 with gr.Row():
-                    btn_desc2imgGenerate = gr.Button(value='Description -> Prompt', variant='primary')
+                    with gr.Column():
+                        blank1 = gr.Button(visible=False)
+                    with gr.Column():
+                        btn_desc2imgGenerate = gr.Button(value='Description -> Prompt', variant='primary')
+                    with gr.Column():
+                        blank2 = gr.Button(visible=False)
                 with gr.Row():
-                    tb_imgOutput = gr.Textbox(label='Image Prompt', interactive=False)
+                    tb_imgOutput = gr.Textbox(label='Image Prompt', interactive=True)
                 with gr.Row():
                     btn_sendTxt2img = gr.Button(value='Send to txt2img')
                     btn_sendImg2img = gr.Button(value='Send to img2img')
+                with gr.Row():
+                    btn_submit = gr.Button(value='Generate')
 
         btn_saveApiKey.click(
             fn=write_apiKey,
