@@ -93,10 +93,7 @@ def on_ui_tabs():
                     btn_imgGenerate = gr.Button(value='Generate Image Prompt', variant='primary')
                 with gr.Row():
                     tb_apiKey = gr.Textbox(label='openAI API Key', interactive=True)
-                    btn_saveApiKey = gr.Button(value='Save API Key', variant='primary')
-                with gr.Row():
-                    btn_sendTxt2img = gr.Button(elem_id='Send to txt2img')
-                    btn_sendImg2img = gr.Button(value='Send to img2img')		
+                    btn_saveApiKey = gr.Button(value='Save API Key', variant='primary')		
             with gr.Column():        
                 with gr.Row():
                     tb_descOutput = gr.Textbox(label='Text Description', interactive=False)
@@ -105,8 +102,8 @@ def on_ui_tabs():
                 with gr.Row():
                     tb_imgOutput = gr.Textbox(label='Image Prompt', interactive=False)
                 with gr.Row():
-                    buttons = params_copypaste.create_buttons(["txt2img", "img2img", "inpaint"])
-                params_copypaste.bind_buttons(buttons, None, tb_imgOutput)
+                    btn_sendTxt2img = gr.Button(elem_id='Send to txt2img')
+                    btn_sendImg2img = gr.Button(value='Send to img2img')
 
         btn_saveApiKey.click(
             fn=write_apiKey,
