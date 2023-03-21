@@ -35,15 +35,23 @@ def on_ui_tabs():
         with gr.Row():
             with gr.Column():
                 tb_input = gr.Textbox(label='ChatGPT Input', interactive=True)
-                btn_generate = gr.Button(value='Generate', variant='primary')
-                tb_output = gr.Textbox(label='Output', interactive=False)           
+                btn_descGenerate = gr.Button(value='Generate Text Description', variant='primary')
+		btn_imgGenerate = gr.Button(value='Generate Image Prompt', variant='primary')
+		
+	    with gr.Column():        
+                with gr.Row():
+                    tb_descOutput = gr.Textbox(label='Text Description', interactive=False)
+		with gr.Row():
+		    btn_desc2imgGenerate = gr.Button(value='Description -> Prompt', variant='primary')
+                with gr.Row():
+                    tb_imgOutput = gr.Textbox(label='Image Prompt', interactive=False)
 
-        btn_generate.click(
+        btn_imgGenerate.click(
             fn=generate_prompt,
             inputs=[
                 tb_input
             ],
-            outputs=tb_output
+            outputs=tb_imgOutput
         )
         
     return [(dnd_interface, "DnD", "dnd_interface")]
