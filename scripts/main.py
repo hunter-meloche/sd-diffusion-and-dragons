@@ -4,11 +4,31 @@ import gradio as gr
 from modules import script_callbacks
 from modules import generation_parameters_copypaste as params_copypaste
 
-def generate_prompt(text: str):
-    # Replace 'placeYourKeyHere' with your actual API key
-    openai.api_key = "placeYourKeyHere"
+# Replace 'placeYourKeyHere' with your actual API key
+openai.api_key = "placeYourKeyHere"
 
-    completion = openai.ChatCompletion.create(
+def generate_description(text: str):
+    description = openai.ChatCompletion.create(
+      model="gpt-3.5-turbo",
+      messages=[{"role": "system", "content": \
+      "You are a skilled fantasy author that writes extremely detailed descriptions. \
+      You will generate descriptions based on user input. \
+      Your response should contain ONLY the description of the user input. \
+      Do NOT respond with text like 'Write a description of a'."}, \
+      {"role": "user", "content": \
+      f"Please write a detailed description that describes {text}. \
+      The written descriptions is meant to be read aloud to an audience. \
+      Do NOT say anything that does not have to do with the description of the input. \
+      An example of what NOT to say is 'The description for the treasure chest is as follows:' \
+      Only provide the description. \
+      Do NOT give it direct commands like 'Write a description'. \
+      Instead only describe the subject with your writing."}]
+    )
+
+    return description.choices[0].message['content']
+
+def generate_imgPrompt(text: str):
+    imgPrompt = openai.ChatCompletion.create(
       model="gpt-3.5-turbo",
       messages=[{"role": "system", "content": \
       "You are a helpful assistant that creates extremely detailed prompts for stable diffusion. \
@@ -28,7 +48,7 @@ def generate_prompt(text: str):
       Instead only describe the subject with your prompt."}]
     )
 	
-    return completion.choices[0].message['content']
+    return imgPrompt.choices[0].message['content'].replace(".", ",")
 
 def on_ui_tabs():
     with gr.Blocks(analytics_enabled=False) as dnd_interface:
@@ -47,11 +67,20 @@ def on_ui_tabs():
                 with gr.Row():
                     tb_imgOutput = gr.Textbox(label='Image Prompt', interactive=False)
 
+        btn_descGenerate.click(
+            fn=generate_description,
+            inputs=tb_input,
+            outputs=tb_descOutput
+                
         btn_imgGenerate.click(
-            fn=generate_prompt,
-            inputs=[
-                tb_input
-            ],
+            fn=generate_imgPrompt,
+            inputs=tb_input,
+            outputs=tb_imgOutput
+        )
+                
+        btn_desc2imgGenerate.click(
+            fn=generate_imgPrompt,
+            inputs=tb_descOutput,
             outputs=tb_imgOutput
         )
         
