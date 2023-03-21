@@ -86,7 +86,7 @@ def generate_imgPrompt(text: str):
 def on_ui_tabs():
     with gr.Blocks(analytics_enabled=False) as dnd_interface:
         with gr.Row():
-            with gr.Column():
+            with gr.Column(scale=1):
                 tb_input = gr.Textbox(label='ChatGPT Input', interactive=True)
                 with gr.Row():
                     btn_descGenerate = gr.Button(value='Generate Text Description', variant='primary')
@@ -94,7 +94,7 @@ def on_ui_tabs():
                 with gr.Row():
                     tb_apiKey = gr.Textbox(label='openAI API Key', interactive=True)
                     btn_saveApiKey = gr.Button(value='Save API Key', variant='primary')		
-            with gr.Column():        
+            with gr.Column(scale=2):        
                 with gr.Row():
                     tb_descOutput = gr.Textbox(label='Text Description', interactive=False)
                 with gr.Row():
