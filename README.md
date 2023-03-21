@@ -8,30 +8,22 @@ This is in early testing. As of now, all it does is take a simple natural langua
 I want this to be the ultimate AI tool for dungeon masters. You say "You walk into a spooky room" and ChatGPT gives you a super detailed description of the room with the proper (and modular) context. You'll be able to feed it details about your setting in a separate box that it can reference when it generates its descriptions. You can use these generated descriptions to DM and read to your players for immersion and ideas. This description is then fed back into ChatGPT to create a Stable Diffusion version of the description so your players have a cool visual aid for the room their characters have walked into or the monster they're fighting.
 
 ## Example Usage
+**You can generate detailed paragraphs about creature's and places from just a few words.**
 ```
 Input:
-fantasy tavern
+a wizard's bedroom
 
-Output:
-tavern, fantasy, dimly-lit, cozy atmosphere, wooden bar, stained glass windows, fireplace, hanging lanterns, kegs of ale, bar stools, dusty tapestries, wandering minstrel, patrons enjoying drinks, mysterious hooded figure in the corner
+Description Output:
+The wizard's bedroom exudes an air of mystique and enchantment. Cobwebs cling to the corners of the room, adding to the otherworldly atmosphere. A bookshelf lines the wall, filled to the brim with ancient tomes and spell books, their spines cracked and faded with age. The bed in the center of the room is adorned with velvet sheets, the colors of midnight and amethyst. A towering headboard looms over the bed, intricately carved with symbols and runes. Two ornate nightstands flank the bed, each holding a flickering candle, casting a warm glow over the room. The floor is covered in a plush red rug, making each step feel like you're walking on clouds. As your eyes adjust to the dim lighting, you see a desk in the corner of the room, covered in various magical artifacts and parchment. The walls themselves seem to pulse with an otherworldly energy, giving you a sense of awe and reverence. It's clear that this is the sleeping quarters of a powerful wizard, and you can't help but feel a sense of reverence for the magic that permeates the room.
 ```
-Before:
-
-![image](https://user-images.githubusercontent.com/123516285/226485681-d0357f69-8a87-4c34-ba2c-7d09701aca47.png)
-
-
-After:
-
-![image](https://user-images.githubusercontent.com/123516285/226485787-e9bcfd1e-cf2c-48ea-b950-2648fb259427.png)
-
+**You can also generate detailed image prompts the same way**
 ```
 Input:
 an armored warrior
 
-Output:
+Image Prompt Output:
 Armored warrior, male, muscular, tall, long hair, wielding sword, full plate armor, battle-worn, standing on rocky terrain, facing towards the viewer, intense gaze
 ```
-
 Before:
 
 ![image](https://user-images.githubusercontent.com/123516285/226486704-1c7e8ac7-b0a5-42c4-96af-ce64dd661717.png)
@@ -40,20 +32,3 @@ Before:
 After:
 
 ![image](https://user-images.githubusercontent.com/123516285/226486552-ed34542f-330b-43ae-af64-2d92e34e6d38.png)
-
-```
-Input:
-a shady figure
-
-Output:
-shady figure, tall and slim, wearing a long coat, black fedora hat with a wide brim, a scarf wrapped around the lower half of their face, standing on a dimly lit street corner at night, with a faint glow of a streetlamp in the background
-```
-
-Before:
-
-![image](https://user-images.githubusercontent.com/123516285/226487437-2b541042-b92a-4073-a77b-dffddd7cece6.png)
-
-
-After:
-
-![image](https://user-images.githubusercontent.com/123516285/226487752-47663983-d788-4c06-952b-c9ae1542e2d3.png)
