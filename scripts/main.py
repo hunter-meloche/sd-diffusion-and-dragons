@@ -24,9 +24,10 @@ def read_key_value():
 def write_apiKey(text: str):
     try:
         with open(KEY_PATH, 'w') as file:
-            file.write(f"{KEY}='{text}'")
+            file.write(f"{KEY}={text}")
     except Exception as e:
         print(f"Error writing openAI API key to file: {e}")
+    return ""
 
 def generate_description(text: str):
     openai.api_key = read_key_value()
@@ -95,7 +96,8 @@ def on_ui_tabs():
 
         btn_saveApiKey.click(
             fn=write_apiKey,
-            inputs=tb_apiKey
+            inputs=tb_apiKey,
+            outputs=tb_apiKey
 	)
                 
         btn_descGenerate.click(
