@@ -1,8 +1,8 @@
 # Diffusion and Dragons
 ## About
-This is in early testing. As of now, all it does is take a simple natural language prompt and make a more detailed one, either as descriptive paragraphs or intricate image prompts. You need to input your [openAI API key](https://platform.openai.com/account/api-keys) the first time you use DnD. I'll be adding a button through the UI that takes care of this for you later on. Shoutout to [controlnet](https://github.com/Mikubill/sd-webui-controlnet) and [text2prompt](https://github.com/toshiaki1729/stable-diffusion-webui-text2prompt) because I frankensteined your code together to make this.
+This is in early testing. As of now, all it does is take a simple natural language prompt and make a more detailed one, either as descriptive paragraphs or intricate image prompts. You need to input your [openAI API key](https://platform.openai.com/account/api-keys) the first time you use DnD.
 
-![image](https://user-images.githubusercontent.com/123516285/226503708-4c0cc703-023d-4e57-960a-1bd6efafaac7.png)
+![image](https://user-images.githubusercontent.com/123516285/226767646-5e06aa73-5d3c-453d-8805-c58ca5826d16.png)
 
 ## Plans
 I want this to be the ultimate AI tool for dungeon masters. You say your players walk into "a spooky room" and ChatGPT gives you a super detailed description of the room with the proper (and modular) context. You'll be able to feed it details about your setting in a separate box that it can reference when it generates its descriptions. You can use these generated descriptions to DM and read to your players for immersion and ideas. This description is then fed back into ChatGPT to create a Stable Diffusion version of the description so your players have a cool visual aid for the room their characters have walked into or the monster they're fighting.
