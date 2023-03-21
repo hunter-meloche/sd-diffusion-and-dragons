@@ -93,7 +93,7 @@ def on_ui_tabs():
                     btn_desc2imgGenerate = gr.Button(value='Description -> Prompt', variant='primary')
                 with gr.Row():
                     tb_imgOutput = gr.Textbox(label='Image Prompt', interactive=False)
-		with gr.Row():
+                with gr.Row():
                     buttons = params_copypaste.create_buttons(["txt2img", "img2img", "inpaint"])
                 params_copypaste.bind_buttons(buttons, None, tb_imgOutput)
 
