@@ -29,6 +29,16 @@ def write_apiKey(text: str):
         print(f"Error writing openAI API key to file: {e}")
     return ""
 
+def find_prompts(fields):
+    field_prompt = [x for x in fields if x[1] == "Prompt"][0]
+    field_negative_prompt = [x for x in fields if x[1] == "Negative prompt"][0]
+    return [field_prompt[0], field_negative_prompt[0]]
+
+def send_prompts(text: str):
+    params = generation_parameters_copypaste.parse_generation_parameters(text)
+    negative_prompt = params.get("Negative prompt", "")
+    return params.get("Prompt", ""), negative_prompt or gr.update()
+
 def generate_description(text: str):
     openai.api_key = read_key_value()
     description = openai.ChatCompletion.create(
@@ -85,7 +95,9 @@ def on_ui_tabs():
                 with gr.Row():
                     tb_apiKey = gr.Textbox(label='openAI API Key', interactive=True)
                     btn_saveApiKey = gr.Button(value='Save API Key', variant='primary')
-		
+                with gr.Row():
+                    btn_sendTxt2img = gr.Button(elem_id='Send to txt2img')
+                    btn_sendImg2img = gr.Button(value='Send to img2img')		
             with gr.Column():        
                 with gr.Row():
                     tb_descOutput = gr.Textbox(label='Text Description', interactive=False)
@@ -119,6 +131,20 @@ def on_ui_tabs():
             fn=generate_imgPrompt,
             inputs=tb_descOutput,
             outputs=tb_imgOutput
+        )
+        
+        btn_sendTxt2img.click(
+            fn=send_prompts,
+            _js=f"switch_to_txt2img",
+            inputs=[tb_imgOutput],
+            outputs=find_prompts(ui.txt2img_paste_fields)
+        )
+        
+        btn_sendImg2img.click(
+            fn=send_prompts,
+            _js=f"switch_to_img2img",
+            inputs=[tb_imgOutput],
+            outputs=find_prompts(ui.img2img_paste_fields)
         )
         
     return [(dnd_interface, "DnD", "dnd_interface")]
