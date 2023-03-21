@@ -1,13 +1,35 @@
-import re
+import os
 import openai
 import gradio as gr
 from modules import script_callbacks
 from modules import generation_parameters_copypaste as params_copypaste
 
-# Replace 'placeYourKeyHere' with your actual API key
-openai.api_key = "placeYourKeyHere"
+KEY_PATH = req_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), ".openai")
+KEY = "openAI_API_key"
+
+def read_key_value():
+    result = None
+    try:
+        with open(KEY_PATH, 'r') as file:
+            for line in file:
+                if line.startswith(KEY):
+                    result = line.split('=')[1].strip()
+                    break
+    except FileNotFoundError:
+        print(f"File {KEY_PATH} not found.")
+    except IndexError:
+        print(f"Key '{KEY}' not found in the file.")
+    return result
+
+def write_apiKey(text: str):
+    try:
+        with open(KEY_PATH, 'w') as file:
+            file.write(f"{KEY}='{text}'")
+    except Exception as e:
+        print(f"Error writing openAI API key to file: {e}")
 
 def generate_description(text: str):
+    openai.api_key = read_key_value()
     description = openai.ChatCompletion.create(
       model="gpt-3.5-turbo",
       messages=[{"role": "system", "content": \
@@ -24,10 +46,11 @@ def generate_description(text: str):
       Do NOT give it direct commands like 'Write a description'. \
       Instead only describe the subject with your writing."}]
     )
-
     return description.choices[0].message['content']
 
+
 def generate_imgPrompt(text: str):
+    openai.api_key = read_key_value()
     imgPrompt = openai.ChatCompletion.create(
       model="gpt-3.5-turbo",
       messages=[{"role": "system", "content": \
@@ -47,8 +70,8 @@ def generate_imgPrompt(text: str):
       Do NOT give it direct commands like 'Generate an image'. \
       Instead only describe the subject with your prompt."}]
     )
-	
     return imgPrompt.choices[0].message['content'].replace(".", ",")
+
 
 def on_ui_tabs():
     with gr.Blocks(analytics_enabled=False) as dnd_interface:
@@ -58,6 +81,9 @@ def on_ui_tabs():
                 with gr.Row():
                     btn_descGenerate = gr.Button(value='Generate Text Description', variant='primary')
                     btn_imgGenerate = gr.Button(value='Generate Image Prompt', variant='primary')
+                with gr.Row():
+                    tb_apiKey = gr.Textbox(label='openAI API Key', interactive=True)
+                    btn_saveApiKey = gr.Button(value='Save API Key', variant='primary')
 		
             with gr.Column():        
                 with gr.Row():
@@ -67,6 +93,11 @@ def on_ui_tabs():
                 with gr.Row():
                     tb_imgOutput = gr.Textbox(label='Image Prompt', interactive=False)
 
+        btn_writeApiKey.click(
+            fn=write_apiKey,
+            inputs=tb_apiKey
+	)
+                
         btn_descGenerate.click(
             fn=generate_description,
             inputs=tb_input,
