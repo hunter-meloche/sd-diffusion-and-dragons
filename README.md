@@ -14,7 +14,16 @@ Input:
 a wizard's bedroom
 
 Description Output:
-The wizard's bedroom exudes an air of mystique and enchantment. Cobwebs cling to the corners of the room, adding to the otherworldly atmosphere. A bookshelf lines the wall, filled to the brim with ancient tomes and spell books, their spines cracked and faded with age. The bed in the center of the room is adorned with velvet sheets, the colors of midnight and amethyst. A towering headboard looms over the bed, intricately carved with symbols and runes. Two ornate nightstands flank the bed, each holding a flickering candle, casting a warm glow over the room. The floor is covered in a plush red rug, making each step feel like you're walking on clouds. As your eyes adjust to the dim lighting, you see a desk in the corner of the room, covered in various magical artifacts and parchment. The walls themselves seem to pulse with an otherworldly energy, giving you a sense of awe and reverence. It's clear that this is the sleeping quarters of a powerful wizard, and you can't help but feel a sense of reverence for the magic that permeates the room.
+The wizard's bedroom exudes an air of mystique and enchantment. 
+Cobwebs cling to the corners of the room, adding to the otherworldly atmosphere. 
+bookshelf lines the wall, filled to the brim with ancient tomes and spell books, their spines cracked and faded with age. 
+The bed in the center of the room is adorned with velvet sheets, the colors of midnight and amethyst. 
+A towering headboard looms over the bed, intricately carved with symbols and runes. 
+Two ornate nightstands flank the bed, each holding a flickering candle, casting a warm glow over the room. 
+The floor is covered in a plush red rug, making each step feel like you're walking on clouds. 
+As your eyes adjust to the dim lighting, you see a desk in the corner of the room, covered in various magical artifacts and parchment. 
+The walls themselves seem to pulse with an otherworldly energy, giving you a sense of awe and reverence. 
+It's clear that this is the sleeping quarters of a powerful wizard, and you can't help but feel a sense of reverence for the magic that permeates the room.
 ```
 **You can also generate detailed image prompts the same way**
 ```
