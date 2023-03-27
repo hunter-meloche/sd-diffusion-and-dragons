@@ -1,6 +1,7 @@
 import os
 import openai
 import gradio as gr
+import numpy as np
 from modules import script_callbacks, generation_parameters_copypaste, ui
 import modules.shared as shared
 from modules.shared import opts, cmd_opts, restricted_opts
@@ -9,6 +10,7 @@ from modules.paths import script_path, data_path
 from modules.ui_components import FormRow, FormGroup, ToolButton, FormHTML
 from modules.call_queue import wrap_gradio_gpu_call, wrap_queued_call, wrap_gradio_call
 import modules.generation_parameters_copypaste as parameters_copypaste
+import modules.interrogate as interrogate
 from modules.ui import create_output_panel
 import modules.scripts
 from PIL import Image
@@ -104,6 +106,12 @@ def generate_imgPrompt(text: str):
     )
     return imgPrompt.choices[0].message['content'].replace(".", ",")
 
+def generate_imgDescription(gallery):
+    openai.api_key = read_key_value()
+    print(gallery[0]['name'])
+    image = Image.open(gallery[0]['name'])
+    prompt = shared.interrogator.interrogate(image.convert("RGB"))
+    return prompt
 
 def on_ui_tabs():
     with gr.Blocks(analytics_enabled=False, css=".gradio-output-image img {height: 1024px;object-fit: contain;max-width: 100%;}") as dnd_interface:
@@ -121,6 +129,8 @@ def on_ui_tabs():
                 tb_input = gr.Textbox(label='ChatGPT Input', interactive=True)
                 with gr.Row():
                     btn_imgGenerate = gr.Button(value='Generate Image Prompt', variant='primary')
+                with gr.Row():
+                    btn_img2descGenerate = gr.Button(value='Image -> Description', elem_id="interrogate", variant='primary')
                 with gr.Row():
                     tb_descOutput = gr.Textbox(label='Text Description', interactive=True, lines=3)
                 with gr.Row():
@@ -341,6 +351,12 @@ def on_ui_tabs():
         
         txt2img_prompt.submit(**txt2img_args)
         submit.click(**txt2img_args)
+        
+        btn_img2descGenerate.click(
+                fn=generate_imgDescription,
+                inputs=DnD_gallery,
+                outputs=tb_descOutput
+        )
         
     return [(dnd_interface, "DnD", "dnd_interface")]
 
