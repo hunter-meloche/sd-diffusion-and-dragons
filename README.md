@@ -1,11 +1,13 @@
 # Diffusion and Dragons
 ## About
-This is in early testing. As of now, all it does is take a simple natural language prompt and make a more detailed one, either as descriptive paragraphs or intricate image prompts. You need to input your [openAI API key](https://platform.openai.com/account/api-keys) the first time you use DnD.
+DnD is meant to be a tool for game masters to use as a tool to aadd visual and literary color to their sessions. DnD generates detailed image prompts and text descriptions meant to be read to player based on simple phrases as input, like 'a dog' or 'a dungeon room'. When players go off the rails of your campaign, DnD is here to help you
 
-![image](https://user-images.githubusercontent.com/123516285/227981577-60c16a0f-2db4-4c0d-80a1-ffc7c2afa133.png)
+You need to input your [openAI API key](https://platform.openai.com/account/api-keys) the first time you use DnD.
+
+![image](https://user-images.githubusercontent.com/123516285/228127446-a500fe96-325d-4143-ac12-c4bdd61adc24.png)
 
 ## Plans
-I want this to be the ultimate AI tool for dungeon masters. You say your players walk into "a spooky room" and ChatGPT gives you a super detailed description of the room with the proper (and modular) context. You'll be able to feed it details about your setting in a separate box that it can reference when it generates its descriptions. You can use these generated descriptions to DM and read to your players for immersion and ideas. This description is then fed back into ChatGPT to create a Stable Diffusion version of the description so your players have a cool visual aid for the room their characters have walked into or the monster they're fighting.
+I'll be adding a long term memory solution that keeps track of the world, objects, and NPCs. This way you can have accurate dialogue with recurring characters and randomly generated characters will persist. This will make the game world become more alive than ever before. If anyone knows of a smart way to do this, please let me know. Right now, I'm thinking of keep a log locally that appends to a Redis embedding store that launches with DnD every time sd-web-ui starts.
 
 ## Example Usage
 **You can generate detailed paragraphs about creature's and places from just a few words.**
