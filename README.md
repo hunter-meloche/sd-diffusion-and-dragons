@@ -1,4 +1,4 @@
-# Diffusion and Dragons
+# Diffusion and Dragons (DnD)
 ## About
 DnD is meant to be a tool for game masters to use as a tool to aadd visual and literary color to their sessions. DnD generates detailed image prompts and text descriptions meant to be read to player based on simple phrases as input, like 'a dog' or 'a dungeon room'. When players go off the rails of your campaign, DnD is here to help you
 
