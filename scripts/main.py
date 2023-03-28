@@ -52,16 +52,6 @@ def write_apiKey(text: str):
         print(f"Error writing openAI API key to file: {e}")
     return ""
 
-def find_prompts(fields):
-    field_prompt = [x for x in fields if x[1] == "Prompt"][0]
-    field_negative_prompt = [x for x in fields if x[1] == "Negative prompt"][0]
-    return [field_prompt[0], field_negative_prompt[0]]
-
-def send_prompts(text: str):
-    params = generation_parameters_copypaste.parse_generation_parameters(text)
-    negative_prompt = params.get("Negative prompt", "")
-    return params.get("Prompt", ""), negative_prompt or gr.update()
-
 def generate_description(text: str):
     openai.api_key = read_key_value()
     description = openai.ChatCompletion.create(
