@@ -14,6 +14,11 @@ import modules.interrogate as interrogate
 from modules.ui import create_output_panel
 import modules.scripts
 from PIL import Image
+from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.vectorstores.faiss import FAISS
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.chains import load_chain
+from langchain import OpenAI, VectorDBQA
 
 #Using constants for these since the variation selector isn't visible.
 # Important that they exactly match script.js for tooltip to work.
@@ -27,7 +32,7 @@ clear_prompt_symbol = '\U0001F5D1'  # 🗑️
 extra_networks_symbol = '\U0001F3B4'  # 🎴
 switch_values_symbol = '\U000021C5' # ⇅
 
-KEY_PATH = req_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), ".openai")
+KEY_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), ".openai")
 KEY = "openAI_API_key"
 
 def read_key_value():
@@ -51,6 +56,18 @@ def write_apiKey(text: str):
     except Exception as e:
         print(f"Error writing openAI API key to file: {e}")
     return ""
+
+def memory(text: str):
+    os.environ["OPENAI_API_KEY"] = read_key_value()
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=3000, chunk_overlap=0)
+    with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "ch400.txt"), 'r', encoding='utf-8') as file:
+        content = file.read()
+    texts = text_splitter.split_text(content)
+    embeddings = OpenAIEmbeddings()
+    vectorstore = FAISS.from_texts(texts, embeddings)
+    qa = VectorDBQA.from_chain_type(llm=OpenAI(), chain_type="stuff", vectorstore=vectorstore)
+    response = qa.run(text)
+    print(response)
 
 def generate_description(text: str):
     openai.api_key = read_key_value()
@@ -153,6 +170,7 @@ def on_ui_tabs():
                 with gr.Row():
                     tb_apiKey = gr.Textbox(label='openAI API Key', interactive=True)
                     btn_saveApiKey = gr.Button(value='Save API Key')
+                    btn_memory = gr.Button(value='memory')
                 with gr.Row().style(equal_height=False):
                     with gr.Column(variant='compact', elem_id="txt2img_settings"):
                         for category in ui.ordered_ui_categories():
@@ -366,9 +384,14 @@ def on_ui_tabs():
         submit.click(**txt2img_args)
         
         btn_img2descGenerate.click(
-                fn=generate_imgDescription,
-                inputs=[DnD_gallery, tb_input],
-                outputs=tb_descOutput
+            fn=generate_imgDescription,
+            inputs=[DnD_gallery, tb_input],
+            outputs=tb_descOutput
+        )
+        
+        btn_memory.click(
+            fn=memory,
+            inputs=tb_input
         )
         
     return [(dnd_interface, "DnD", "dnd_interface")]
