@@ -30,16 +30,11 @@ It's clear that this is the sleeping quarters of a powerful wizard, and you can'
 **You can also generate detailed image prompts the same way**
 ```
 Input:
-an armored warrior
+a man with a big sword
 
 Image Prompt Output:
-Armored warrior, male, muscular, tall, long hair, wielding sword, full plate armor, battle-worn, standing on rocky terrain, facing towards the viewer, intense gaze
+man, sword, big, muscular, fierce, intense, determined, warrior, battle-ready, standing, powerful, sharp, metal, hilt, glowing, confident, commanding, unyielding,
 ```
-Before:
 
-![image](https://user-images.githubusercontent.com/123516285/226486704-1c7e8ac7-b0a5-42c4-96af-ce64dd661717.png)
+![dnd-before-after](https://user-images.githubusercontent.com/123516285/228140093-8291cc04-28a0-4ee4-9ba1-bb204b1c3f70.png)
 
-
-After:
-
-![image](https://user-images.githubusercontent.com/123516285/226486552-ed34542f-330b-43ae-af64-2d92e34e6d38.png)
