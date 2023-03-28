@@ -7,7 +7,7 @@ You need to input your [openAI API key](https://platform.openai.com/account/api-
 ![image](https://user-images.githubusercontent.com/123516285/228127446-a500fe96-325d-4143-ac12-c4bdd61adc24.png)
 
 ## Plans
-I'll be adding a long term memory solution that keeps track of the world, objects, and NPCs. This way you can have accurate dialogue with recurring characters and randomly generated characters will persist. This will make the game world become more alive than ever before. If anyone knows of a smart way to do this, please let me know. Right now, I'm thinking of keep a log locally that appends to a Redis embedding store that launches with DnD every time sd-web-ui starts.
+I'll be adding a long term memory solution that keeps track of the world, objects, and NPCs. This way you can have accurate dialogue with recurring characters and randomly generated characters will persist. This will make the game world become more alive than ever before. If anyone knows of a smart way to do this, please let me know. Right now, I'm thinking of keeping a prompt log locally that appends to a Redis embedding store that launches with DnD every time sd-web-ui starts.
 
 ## Example Usage
 **You can generate detailed paragraphs about creature's and places from just a few words.**
