@@ -57,6 +57,8 @@ def write_apiKey(text: str):
         print(f"Error writing openAI API key to file: {e}")
     return ""
 
+def create_embedding(text: str):
+
 def memory(text: str):
     os.environ["OPENAI_API_KEY"] = read_key_value()
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=3000, chunk_overlap=0)
