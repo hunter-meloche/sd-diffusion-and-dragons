@@ -1,6 +1,6 @@
 # Diffusion and Dragons (DnD)
 ## About
-DnD is a tool for game masters to add visual and literary color to their sessions. DnD generates detailed image prompts and text descriptions meant to be read to player based on simple phrases as input, like 'a dog' or 'a dungeon room'. When players go off the rails of your campaign, DnD is here to help you
+DnD is a tool for game masters to add visual and literary color to their sessions. DnD generates detailed image prompts and text descriptions meant to be read to players based on simple phrases as input, like 'a dog' or 'a dungeon room'. When players go off the rails of your campaign, DnD is here to help you
 
 You need to input your [openAI API key](https://platform.openai.com/account/api-keys) the first time you use DnD.
 
