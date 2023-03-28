@@ -106,15 +106,38 @@ def generate_imgPrompt(text: str):
     )
     return imgPrompt.choices[0].message['content'].replace(".", ",")
 
-def generate_imgDescription(gallery):
+def generate_imgDescription(gallery, prompt):
     openai.api_key = read_key_value()
     print(gallery[0]['name'])
     image = Image.open(gallery[0]['name'])
-    prompt = shared.interrogator.interrogate(image.convert("RGB"))
-    return prompt
+    clip_prompt = shared.interrogator.interrogate(image.convert("RGB"))
+    clip_description = clip_prompt.split(",")[0]  
+    description = openai.ChatCompletion.create(
+      model="gpt-3.5-turbo",
+      messages=[{"role": "system", "content": \
+      "You are a skilled fantasy author that writes extremely detailed descriptions of images. \
+      You will generate descriptions based on user input. \
+      Your response should contain ONLY the description of the user input. \
+      Do NOT respond with text like 'Write a description of a'."}, \
+      {"role": "user", "content": \
+      f"Please write a detailed description about an image depicting {prompt}. \
+      I'm also providing a description of the image generated from CLIP. \
+      If you encounter any conflicting information, choose the earlier information first instead of saying something nonsensical. \
+      Please use the CLIP description as a supplement to you writing:\n\n \
+      {clip_description} \n\n \
+      The written descriptions is meant to be read aloud to an audience. \
+      Do NOT say anything that does not have to do with the description of the input. \
+      Do NOT say 'image' in reference to the fact that you are describing an image. \
+      An example of what NOT to say is 'The description for the treasure chest is as follows:' \
+      or 'In the center of the image' or 'In this image'. \
+      Only provide the description. \
+      Do NOT give direct commands like 'Write a description'. \
+      Instead only describe the subject with your writing."}]
+    )
+    return description.choices[0].message['content']
 
 def on_ui_tabs():
-    with gr.Blocks(analytics_enabled=False, css=".gradio-output-image img {height: 1024px;object-fit: contain;max-width: 100%;}") as dnd_interface:
+    with gr.Blocks(analytics_enabled=False) as dnd_interface:
     
         txt2img_prompt, txt2img_prompt_styles, txt2img_negative_prompt, submit, _, _, txt2img_prompt_style_apply, txt2img_save_style, txt2img_paste, extra_networks_button, token_counter, token_button, negative_token_counter, negative_token_button = ui.create_toprow(is_img2img=False)
         dummy_component = gr.Label(visible=False)
@@ -130,13 +153,13 @@ def on_ui_tabs():
                 with gr.Row():
                     btn_imgGenerate = gr.Button(value='Generate Image Prompt', variant='primary')
                 with gr.Row():
-                    btn_img2descGenerate = gr.Button(value='Image -> Description', elem_id="interrogate", variant='primary')
+                    btn_descGenerate = gr.Button(value='Generate Text Description', variant='primary')
                 with gr.Row():
                     tb_descOutput = gr.Textbox(label='Text Description', interactive=True, lines=3)
                 with gr.Row():
-                    btn_descGenerate = gr.Button(value='Generate Text Description', variant='primary')
-                with gr.Row():
                     btn_desc2imgGenerate = gr.Button(value='Description -> Prompt', variant='primary')
+                with gr.Row():
+                    btn_img2descGenerate = gr.Button(value='Image -> Description', variant='primary')
                 with gr.Row():
                     tb_apiKey = gr.Textbox(label='openAI API Key', interactive=True)
                     btn_saveApiKey = gr.Button(value='Save API Key')
@@ -354,7 +377,7 @@ def on_ui_tabs():
         
         btn_img2descGenerate.click(
                 fn=generate_imgDescription,
-                inputs=DnD_gallery,
+                inputs=[DnD_gallery, tb_input],
                 outputs=tb_descOutput
         )
         
