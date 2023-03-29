@@ -19,6 +19,7 @@ from langchain.vectorstores.faiss import FAISS
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chains import load_chain
 from langchain import OpenAI, VectorDBQA
+from langchain.chat_models import ChatOpenAI
 
 #Using constants for these since the variation selector isn't visible.
 # Important that they exactly match script.js for tooltip to work.
@@ -34,7 +35,6 @@ switch_values_symbol = '\U000021C5' # ⇅
 
 KEY_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), ".openai")
 KEY = "openAI_API_key"
-os.environ["OPENAI_API_KEY"] = read_key_value()
 
 def read_key_value():
     result = None
@@ -64,19 +64,20 @@ def create_embedding(text: str):
     texts = text_splitter.split_text(text)
     embeddings = OpenAIEmbeddings()
     vectorstore = FAISS.from_texts(texts, embeddings)
-    qa = VectorDBQA.from_chain_type(llm=OpenAI(), chain_type="stuff", vectorstore=vectorstore)
+    qa = VectorDBQA.from_chain_type(llm=ChatOpenAI(model_name='gpt-4'), chain_type="stuff", vectorstore=vectorstore)
     return qa
 
 def memory(text: str):
     with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "ch400.txt"), 'r', encoding='utf-8') as file:
         content = file.read()
     embedding = create_embedding(content)
-    response = qa.run(text)
+    response = embedding.run(text)
     print(response)
 
 def generate_description(text: str):
+    openai.api_key = read_key_value()
     description = openai.ChatCompletion.create(
-      model="gpt-3.5-turbo",
+      model="gpt-4",
       messages=[{"role": "system", "content": \
       "You are a skilled fantasy author that writes extremely detailed descriptions. \
       You will generate descriptions based on user input. \
@@ -95,8 +96,9 @@ def generate_description(text: str):
 
 
 def generate_imgPrompt(text: str):
+    openai.api_key = read_key_value()
     imgPrompt = openai.ChatCompletion.create(
-      model="gpt-3.5-turbo",
+      model="gpt-4",
       messages=[{"role": "system", "content": \
       "You are a helpful assistant that creates extremely detailed prompts for stable diffusion. \
       You will generate prompts based on user input. \
@@ -117,12 +119,13 @@ def generate_imgPrompt(text: str):
     return imgPrompt.choices[0].message['content'].replace(".", ",")
 
 def generate_imgDescription(gallery, prompt):
+    openai.api_key = read_key_value()
     print(gallery[0]['name'])
     image = Image.open(gallery[0]['name'])
     clip_prompt = shared.interrogator.interrogate(image.convert("RGB"))
     clip_description = clip_prompt.split(",")[0]  
     description = openai.ChatCompletion.create(
-      model="gpt-3.5-turbo",
+      model="gpt-4",
       messages=[{"role": "system", "content": \
       "You are a skilled fantasy author that writes extremely detailed descriptions of images. \
       You will generate descriptions based on user input. \
@@ -148,6 +151,7 @@ def generate_imgDescription(gallery, prompt):
 def on_ui_tabs():
     with gr.Blocks(analytics_enabled=False) as dnd_interface:
     
+        os.environ["OPENAI_API_KEY"] = read_key_value()
         txt2img_prompt, txt2img_prompt_styles, txt2img_negative_prompt, submit, _, _, txt2img_prompt_style_apply, txt2img_save_style, txt2img_paste, extra_networks_button, token_counter, token_button, negative_token_counter, negative_token_button = ui.create_toprow(is_img2img=False)
         dummy_component = gr.Label(visible=False)
         txt_prompt_img = gr.File(label="", elem_id="txt2img_prompt_image", file_count="single", type="binary", visible=False)
