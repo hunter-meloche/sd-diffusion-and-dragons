@@ -34,6 +34,7 @@ switch_values_symbol = '\U000021C5' # ⇅
 
 KEY_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), ".openai")
 KEY = "openAI_API_key"
+os.environ["OPENAI_API_KEY"] = read_key_value()
 
 def read_key_value():
     result = None
@@ -53,15 +54,15 @@ def write_apiKey(text: str):
     try:
         with open(KEY_PATH, 'w') as file:
             file.write(f"{KEY}={text}")
+            os.environ["OPENAI_API_KEY"] = text
     except Exception as e:
         print(f"Error writing openAI API key to file: {e}")
     return ""
 
 def create_embedding(text: str):
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=3000, chunk_overlap=0)
 
 def memory(text: str):
-    os.environ["OPENAI_API_KEY"] = read_key_value()
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=3000, chunk_overlap=0)
     with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "ch400.txt"), 'r', encoding='utf-8') as file:
         content = file.read()
     texts = text_splitter.split_text(content)
@@ -72,7 +73,6 @@ def memory(text: str):
     print(response)
 
 def generate_description(text: str):
-    openai.api_key = read_key_value()
     description = openai.ChatCompletion.create(
       model="gpt-3.5-turbo",
       messages=[{"role": "system", "content": \
@@ -93,7 +93,6 @@ def generate_description(text: str):
 
 
 def generate_imgPrompt(text: str):
-    openai.api_key = read_key_value()
     imgPrompt = openai.ChatCompletion.create(
       model="gpt-3.5-turbo",
       messages=[{"role": "system", "content": \
@@ -116,7 +115,6 @@ def generate_imgPrompt(text: str):
     return imgPrompt.choices[0].message['content'].replace(".", ",")
 
 def generate_imgDescription(gallery, prompt):
-    openai.api_key = read_key_value()
     print(gallery[0]['name'])
     image = Image.open(gallery[0]['name'])
     clip_prompt = shared.interrogator.interrogate(image.convert("RGB"))
