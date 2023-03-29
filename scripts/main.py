@@ -61,14 +61,16 @@ def write_apiKey(text: str):
 
 def create_embedding(text: str):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=3000, chunk_overlap=0)
+    texts = text_splitter.split_text(text)
+    embeddings = OpenAIEmbeddings()
+    vectorstore = FAISS.from_texts(texts, embeddings)
+    qa = VectorDBQA.from_chain_type(llm=OpenAI(), chain_type="stuff", vectorstore=vectorstore)
+    return qa
 
 def memory(text: str):
     with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "ch400.txt"), 'r', encoding='utf-8') as file:
         content = file.read()
-    texts = text_splitter.split_text(content)
-    embeddings = OpenAIEmbeddings()
-    vectorstore = FAISS.from_texts(texts, embeddings)
-    qa = VectorDBQA.from_chain_type(llm=OpenAI(), chain_type="stuff", vectorstore=vectorstore)
+    embedding = create_embedding(content)
     response = qa.run(text)
     print(response)
 
